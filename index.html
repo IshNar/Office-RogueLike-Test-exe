@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#1d2330">
+<title>퇴근은 없다</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="modulepreload" href="three.js">
+</head>
+<body>
+<div id="app"></div>
+<div id="hud" class="hidden">
+  <!-- 3행 그리드 (ui-ux 3-4): 0행 보스 바 · 1행 HP/타이머/∥ · 2행 Lv+XP/웨이브 · 3행 돈/상태 -->
+  <div id="hudGrid">
+    <div id="bossBar" class="hidden"><img id="bossIco" alt=""><div class="bar boss"><i id="bossFill"></i></div><span id="bossName" class="sr"></span><span id="bossRage"><svg class="ico" aria-hidden="true"><use href="#i-rage"/></svg></span></div>
+    <div id="hpBox"><svg class="ico" aria-hidden="true"><use href="#i-maxHp"/></svg><div class="bar hp"><i id="hpFill"></i><span id="hpText" class="num"></span></div></div>
+    <div id="timeBox"><img id="timeBoss" class="hidden" alt=""><span id="timeText" class="num"></span></div>
+    <button id="pauseBtn" aria-label="일시정지" title="일시정지"><svg class="ico" aria-hidden="true"><use href="#i-pause"/></svg></button>
+    <div id="xpBox"><span id="xpText" class="lv num"></span><div class="bar xp"><i id="xpFill"></i></div></div>
+    <div id="waveBox"><span id="stampBox"></span><span id="waveText" class="num"></span></div>
+    <div id="money"><img id="moneyIcon" alt=""><span id="moneyText" class="num">0</span></div>
+    <div id="statusRow"></div>
+  </div>
+  <div id="wstrip"></div>
+  <div id="edges"></div>
+</div>
+<div id="nums"></div>
+<div id="toasts"></div>
+<div id="hurtFx"></div>
+<div id="lowhp"></div>
+<div id="corner"></div>
+<div id="stick"><div id="knob"></div></div>
+<div id="screen" class="hidden"></div>
+<div id="fx"></div>
+<div id="modal" class="hidden"></div>
+<script type="module" src="game.js"></script>
+</body>
+</html>
