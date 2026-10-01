@@ -137,6 +137,17 @@ button.danger { background: var(--neg); border-color: var(--neg); color: #fff; }
 #statusRow { grid-area: status; display: flex; gap: 4px; min-height: 0; }
 #statusRow .st { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: rgba(0, 0, 0, .5); color: #fff; }
 #statusRow .st .ico { width: 16px; height: 16px; }
+/* [빌드 P2] 인턴 수 칩: 보라 알약 + 얼굴 + 숫자 */
+#statusRow .st.st-n { width: auto; min-width: 24px; padding: 0 7px 0 4px; border-radius: 12px; display: flex; gap: 2px; background: rgba(122, 74, 216, .8); }
+#statusRow .st-n .num { font-style: normal; font-weight: 900; font-size: 13px; }
+/* [빌드 P3] 몸 → 피해 (주황) · 펌프 (주황 진하게) · 자사주 (금색) · 현금 영수증 (초록 공속) · 체력 90% 이상 주황 테 맥동 */
+#statusRow .st-n.body { background: rgba(255, 138, 58, .85); }
+#statusRow .st-n.pump { background: rgba(216, 90, 26, .9); }
+#statusRow .st-n.stock { background: rgba(200, 150, 30, .9); }
+#statusRow .st-n.rc { background: rgba(58, 160, 90, .85); }
+#hpBox.fit .bar { box-shadow: 0 0 0 2px #ff8a3a, 0 0 10px 2px rgba(255, 138, 58, .7); animation: fitPulse 1.2s ease-in-out infinite; }
+@keyframes fitPulse { 50% { box-shadow: 0 0 0 2px #ffb46a, 0 0 16px 4px rgba(255, 138, 58, .9); } }
+:root.noflash #hpBox.fit .bar { animation: none; }
 #pauseBtn { grid-area: pause; justify-self: end; pointer-events: auto; width: 48px; height: 48px; padding: 0; background: rgba(29, 35, 48, .8); color: #fff; }
 #pauseBtn .ico { width: 22px; height: 22px; }
 /* 보스 바: 회백 + 45° 사선 (희귀도 팔레트 밖), 분노 = 붉은 테 맥동 */
@@ -186,6 +197,26 @@ button.danger { background: var(--neg); border-color: var(--neg); color: #fff; }
 #nums > .heal { color: #6aff8a; }
 #nums > .dodge { color: #9ad0ff; }
 #nums > .lvl { color: #7aff8a; font-size: 19px; }
+/* [빌드 P0] 도트·반사·방전 숫자: 작게, 상태 색 (builds.md 7장) */
+#nums > .dot { font-size: 14px; opacity: 0.95; }
+#nums > .dot.poison { color: #7ae89a; }
+#nums > .dot.bleed { color: #ff6a6a; }
+#nums > .dot.static, #nums > .dot.discharge { color: #ffe04a; }
+#nums > .dot.reflect { color: #a8c0e0; }
+#nums > .dot.summon { color: #c8a8ff; }
+#nums > .summon { color: #c8a8ff; } /* [빌드 P2] 인턴 스테이플러 */
+/* [빌드 P3] 충돌 피해 (노랑) · "쿵" · 코인 앱 시세 ▲ 초록 / ▼ 빨강 */
+#nums > .kcol { color: #ffe04a; }
+#nums > .thud { color: #fff3a8; font-size: 15px; font-weight: 900; letter-spacing: .04em; -webkit-text-stroke: 1px #6a4a00; }
+#nums > .stockUp { color: #5ae87a; font-size: 22px; font-weight: 900; } #nums > .stockDn { color: #ff6a5a; font-size: 22px; font-weight: 900; }
+/* [빌드 P1] 반사 숫자 앞 작은 방패 · 열상 (굵은 빨강, 크게) · 꼬투리 겹이 쌓일수록 커지는 숫자 (가득 = 빨간펜 색) */
+#nums > .dot.reflect::before { content: ''; display: inline-block; width: 9px; height: 11px; margin-right: 3px; vertical-align: -1px; background: currentColor; clip-path: polygon(50% 0, 100% 18%, 100% 55%, 50% 100%, 0 55%, 0 18%); }
+#nums > .lac { color: #ff4a4a; font-size: 22px; font-weight: 900; letter-spacing: .02em; }
+#nums > .rmp1 { font-size: 20px; }
+#nums > .rmp2 { font-size: 23px; }
+#nums > .rmp3 { font-size: 26px; }
+#nums > .rmpF { font-size: 29px; color: #ff6a5a; }
+#nums > .crit.rmp1 { font-size: 26px; } #nums > .crit.rmp2 { font-size: 29px; } #nums > .crit.rmp3, #nums > .crit.rmpF { font-size: 32px; }
 #toasts { position: fixed; top: 110px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; z-index: 5; }
 .toast { background: rgba(20, 24, 34, .9); color: #fff; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 14px; animation: tin .25s ease-out; white-space: nowrap; }
 @keyframes tin { from { transform: translateY(-10px); opacity: 0; } }
@@ -447,6 +478,25 @@ h3 { font-size: 14px; margin: 14px 0 6px; color: var(--text-dim); }
 .reroll b { color: var(--money); }
 .reroll[aria-disabled="true"] { opacity: .6; }
 .reroll .wal { color: var(--neg); }
+/* [빌드 P3] 자사주 칸 (재테크): 금색 시세 단추 = 차트 +누적% · 10칸 눈금 · 다음 1주 값. 코인 앱 정산 ▲/▼ 시세 칩 */
+.stock { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 2px solid #e8b83a; background: linear-gradient(180deg, rgba(232, 184, 58, .22), rgba(29, 35, 48, .9)); color: #ffd86a; border-radius: 10px; font-size: 18px; }
+.stock .sk { display: inline-flex; align-items: center; gap: 3px; }
+.stock .sk .ico { width: 22px; height: 22px; color: #ffd23a; }
+.stock .sk b { font-weight: 900; color: #fff3c8; }
+.stock .pips { display: inline-grid; grid-template-columns: repeat(5, 6px); gap: 2px; }
+.stock .pips i { width: 6px; height: 6px; border-radius: 2px; background: rgba(255, 255, 255, .18); }
+.stock .pips i.on { background: #ffd23a; box-shadow: 0 0 4px #ffd23a; }
+.stock .pr { display: inline-flex; align-items: center; gap: 3px; }
+.stock .pr img.mi { width: 18px; height: 18px; }
+.stock .pr b { color: var(--money); font-weight: 400; }
+.stock .wal { color: var(--neg); }
+.stock[aria-disabled="true"] { opacity: .6; }
+.stock.full { border-color: #ffd23a; opacity: 1; }
+.stock.flash { animation: stockUp .7s ease-out; }
+@keyframes stockUp { 0% { transform: translateY(0); box-shadow: 0 0 0 0 rgba(255, 210, 58, .9); } 30% { transform: translateY(-4px); } 100% { transform: none; box-shadow: 0 0 0 14px rgba(255, 210, 58, 0); } }
+.tick { display: inline-flex; align-items: center; gap: 2px; padding: 3px 8px; border-radius: 8px; font-size: 16px; font-weight: 900; background: rgba(29, 35, 48, .85); }
+.tick.up { color: #5ae87a; } .tick.dn { color: #ff6a5a; }
+:root.noflash .stock.flash { animation: none; }
 .top-cta { display: none; }
 .shop-main { grid-area: main; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .offers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
@@ -550,6 +600,15 @@ body[data-mode="pause"] #app canvas { filter: blur(2px) brightness(.7); }
 .cbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--spark)); }
 .cb b { min-width: 4ch; text-align: right; font-size: 18px; font-weight: 400; }
 .cb.zero .cbar { background: transparent; border: 1.5px dashed var(--line); }
+/* [빌드 P0] 피해 출처 막대: 상태·반사·인턴 (원소점 아이콘 + 상태 색 막대) */
+.cb.src .cbi { width: 40px; height: 40px; padding: 4px; stroke-width: 1.6; }
+.cbar.s-poison i { background: #4ab86a; }
+.cbar.s-bleed i { background: #d83a3a; }
+.cbar.s-static i { background: #e8c83a; }
+.cbar.s-chill i { background: #8ad0ff; }
+.cbar.reflect i { background: #6a8ab8; }
+.cbar.summon i { background: #9a6ae8; }
+.cbar.collide i { background: #f0c83a; } /* [빌드 P3] 충돌 */
 .results > .slotrow { width: 100%; background: rgba(29, 35, 48, .85); border-radius: 12px; padding: 8px; }
 .unlock { display: inline-flex; align-items: center; gap: 6px; color: var(--money); font-weight: 700; font-size: 18px; }
 .res-btns { display: flex; gap: 10px; }
@@ -700,6 +759,7 @@ code.anon { font: 13px ui-monospace, Consolas, monospace; color: var(--text-dim)
   .shop-top .wv { padding: 4px 6px; font-size: 16px; }
   .shop-top .wv .stamps { display: none; }
   .money { font-size: 20px; padding: 4px 8px; }
+  .stock { font-size: 15px; padding: 3px 6px; gap: 4px; } .stock .pips { display: none; } .tick { font-size: 14px; padding: 2px 5px; }
   .offers { gap: 10px; }
   .offers .cardw { min-height: 250px; }
   .c-art { height: 76px; }
